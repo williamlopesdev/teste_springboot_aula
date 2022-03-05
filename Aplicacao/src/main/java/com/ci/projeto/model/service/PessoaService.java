@@ -33,4 +33,15 @@ public class PessoaService {
 		Pessoa p = pessoa.orElseThrow(() -> new RecursoNaoEncontradoException("Pessoa não encontrada"));
 		return p;
 	}
+	
+	public Pessoa create (Pessoa pessoa) {
+		
+		Pessoa p = new Pessoa();
+		p.setNome(pessoa.getNome());
+		p.setSobreNome(pessoa.getSobreNome());
+		pessoaRepository.save(p);
+		
+		return p;
+	}
+	
 }

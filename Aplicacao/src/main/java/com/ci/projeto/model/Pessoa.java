@@ -19,7 +19,7 @@ public class Pessoa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String sobrenome;
+	private String sobreNome;
 	
 	public Pessoa() {
 
@@ -27,11 +27,11 @@ public class Pessoa implements Serializable{
 	
 	
 	
-	public Pessoa(Long id, String nome, String sobrenome) {
+	public Pessoa(Long id, String nome, String sobreNome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.sobrenome = sobrenome;
+		this.sobreNome = sobreNome;
 	}
 
 
@@ -52,12 +52,12 @@ public class Pessoa implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
+	public String getSobreNome() {
+		return sobreNome;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	public void setSobreNome(String sobreNome) {
+		this.sobreNome = sobreNome;
 	}
 
 
