@@ -1,10 +1,15 @@
 package com.ci.projeto.model.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
 
 
@@ -42,6 +47,37 @@ public class PessoaService {
 		pessoaRepository.save(p);
 		
 		return p;
+	}
+	
+	@Transactional
+	public Pessoa update(Pessoa pessoa, Long id) {
+		try {
+			Optional<Pessoa> p = pessoaRepository.findById(id);
+			p.get().setNome(pessoa.getNome());
+			p.get().setSobreNome(pessoa.getSobreNome());
+			
+			pessoaRepository.save(p.get());
+			
+			return p.get();
+			
+		}catch(EntityNotFoundException e) {
+			throw new RecursoNaoEncontradoException("Id: "+id+" não foi encontrado");
+		}catch(NoSuchElementException e) {
+			throw new RecursoNaoEncontradoException("Id: "+id+" não foi encontrado");
+		}
+		
+	}
+	
+	@Transactional
+	public void delete(Long id) {
+		try {
+			
+			pessoaRepository.deleteById(id);
+			
+			
+		}catch(EmptyResultDataAccessException e) {
+			throw new RecursoNaoEncontradoException("Id: "+id+" não foi encontrado");
+		}
 	}
 	
 }
